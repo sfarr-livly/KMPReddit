@@ -45,7 +45,6 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqllite.bundled)
             api(libs.androidx.viewmodel)
-            implementation("co.touchlab.skie:runtime-kotlin:${libs.versions.skie.get()}")
         }
         
         androidMain.dependencies {

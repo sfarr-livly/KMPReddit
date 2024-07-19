@@ -12,5 +12,4 @@ val commonModule = module {
     single<PostDao> { get<AppDatabase>().postDao() }
     singleOf(::RedditApi)
     singleOf(::RedditRepository)
-    singleOf(::FeedViewModel)
 }
