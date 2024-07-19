@@ -22,6 +22,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.kotlinx.coroutines.android)
         }
         commonMain.dependencies {
             implementation("io.insert-koin:koin-core:3.2.0")

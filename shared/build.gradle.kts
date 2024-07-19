@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.room)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.skie)
 }
 
 kotlin {
@@ -23,8 +24,8 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
+            export(libs.androidx.viewmodel)
             baseName = "Shared"
-            isStatic = true
         }
     }
     
@@ -32,14 +33,19 @@ kotlin {
         commonMain {
             kotlin.srcDir("build/generated/ksp/metadata")
         }
+
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines)
             implementation(libs.kotlinx.serialization)
             api(libs.kotlinx.datetime)
             implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.serialization.json)
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqllite.bundled)
+            api(libs.androidx.viewmodel)
+            implementation("co.touchlab.skie:runtime-kotlin:${libs.versions.skie.get()}")
         }
         
         androidMain.dependencies {
@@ -76,5 +82,12 @@ room {
 tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
     if (name != "kspCommonMainKotlinMetadata" ) {
         dependsOn("kspCommonMainKotlinMetadata")
+    }
+}
+
+skie {
+    features {
+        enableSwiftUIObservingPreview.set(true)
+        enableFutureCombineExtensionPreview.set(true)
     }
 }

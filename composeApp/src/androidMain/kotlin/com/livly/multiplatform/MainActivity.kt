@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.livly.multiplatform.libs.di.appModule
 import com.livly.multiplatform.libs.di.module
 import org.koin.core.context.startKoin
 
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
     
     private fun initKoin() {
         startKoin {
-            modules(module)
+            modules(appModule())
         }
     }
 }

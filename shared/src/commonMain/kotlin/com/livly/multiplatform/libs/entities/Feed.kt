@@ -9,10 +9,10 @@ data class Feed(
 
 @Serializable
 data class Data(
-    val children: Children 
+    val children: List<Children>
 )
 
 @Serializable
 data class Children(
-    val data: List<Post>
+    val data: Post
 )
